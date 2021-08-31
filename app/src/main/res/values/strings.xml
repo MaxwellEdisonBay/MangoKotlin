@@ -7,5 +7,9 @@
     <string name="login_text">Have an existing account? Sign in</string>
     <string name="sign_in">Sign In</string>
     <string name="forget_pass">Forgot your password?</string>
+    <string name="err_username_empty">Username is a required field</string>
+    <string name="err_email_empty">Email is a required field</string>
+    <string name="err_password_empty">Password is a required field</string>
+
 
 </resources>

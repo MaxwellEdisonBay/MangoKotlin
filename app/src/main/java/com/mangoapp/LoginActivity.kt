@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 
 class LoginActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +30,10 @@ class LoginActivity: AppCompatActivity() {
     }
 
     private fun performLogin() {
-        val email = findViewById<EditText>(R.id.email_field_login).text.toString()
-        val password = findViewById<EditText>(R.id.password_field_login).text.toString()
+        val emailEdittext = findViewById<EditText>(R.id.email_field_login)
+        val email = emailEdittext.text.toString()
+        val passwordEdittext = findViewById<EditText>(R.id.password_field_login)
+        val password = passwordEdittext.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Fill in all the required fields", Toast.LENGTH_SHORT).show()
@@ -38,10 +41,12 @@ class LoginActivity: AppCompatActivity() {
         }
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnFailureListener {
-                Toast.makeText(this, "Failed to sign in", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, it.message , Toast.LENGTH_SHORT).show()
             }
             .addOnSuccessListener {
                 Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+                passwordEdittext.setText("")
+                emailEdittext.setText("")
             }
     }
 }

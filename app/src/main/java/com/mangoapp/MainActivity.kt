@@ -3,6 +3,7 @@ package com.mangoapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -30,20 +31,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun performRegister() {
-        val email = findViewById<EditText>(R.id.email_field_register).text.toString()
-        val password = findViewById<EditText>(R.id.password_field_register).text.toString()
-        val username = findViewById<EditText>(R.id.username_field_register).text.toString()
+        val emailEditText = findViewById<EditText>(R.id.email_field_register)
+        val passwordEditText = findViewById<EditText>(R.id.password_field_register)
+        val usernameEditText = findViewById<EditText>(R.id.username_field_register)
+
+        val email = emailEditText.text.toString()
+        val password = passwordEditText.text.toString()
+        val username = usernameEditText.text.toString()
 
         if (username.isEmpty() || password.isEmpty() || email.isEmpty()) {
             Toast.makeText(this, "Please, fill in all the required fields", Toast.LENGTH_SHORT).show()
             return
         }
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (!it.isSuccessful) return@addOnCompleteListener
+            .addOnSuccessListener {
+                passwordEditText.setText("")
+                usernameEditText.setText("")
+                emailEditText.setText("")
+                Toast.makeText(this, "Registration success", Toast.LENGTH_SHORT).show()
+
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Failed to create a user", Toast.LENGTH_SHORT).show()
+                Log.println(Log.DEBUG,"ERR - pass",password)
+                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
             }
     }
 

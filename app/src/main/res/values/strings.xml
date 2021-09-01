@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">Mango Kotlin</string>
+    <string name="app_name">MangoApp</string>
+    <string name="main_desc">Take this mango and be my friend!</string>
     <string name="username_hint">Username</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="register_btn_text">Sign up</string>
     <string name="login_text">Have an existing account? Sign in</string>
-    <string name="sign_in">Sign In</string>
+    <string name="sign_in">Sign in</string>
     <string name="forget_pass">Forgot your password?</string>
     <string name="err_username_empty">Username is a required field</string>
     <string name="err_email_empty">Email is a required field</string>

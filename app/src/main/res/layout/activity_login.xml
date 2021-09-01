@@ -3,20 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/main_orange">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/login_back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_arrow_back_24"
-        android:backgroundTint="@color/teal_200"
+        android:src="@drawable/arrow_back_white"
+        android:backgroundTint="@color/main_purple"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        />
 
     <TextView
         android:id="@+id/login_label"
@@ -25,13 +27,17 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/sign_in"
-        android:layout_marginTop="50dp"
-        android:textSize="30sp"/>
+        android:layout_marginTop="80dp"
+        android:textSize="30sp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/white"/>
 
     <LinearLayout
         android:id="@+id/text_fields_login"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+
         android:divider="@drawable/empty_divider"
         android:orientation="vertical"
         android:showDividers="middle"
@@ -42,29 +48,35 @@
             android:id="@+id/email_field_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="15dp"
+            android:paddingEnd="0dp"
             android:hint="@string/email_hint"
+            android:background="@drawable/rounded_edit_text_field"
             android:minHeight="48dp"
             android:inputType="textEmailAddress"/>
 
         <EditText
             android:id="@+id/password_field_login"
+            android:paddingStart="15dp"
+            android:paddingEnd="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password_hint"
+            android:background="@drawable/rounded_edit_text_field"
             android:minHeight="48dp"
             android:inputType="textPassword"/>
     </LinearLayout>
 
     <Button
-        android:layout_width="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content"
         android:id="@+id/send_btn_login"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/text_fields_login"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="@string/register_btn_text"
-        />
+        android:background="@drawable/rounded_button_login"
+        android:text="@string/sign_in" />
 
     <TextView
         android:id="@+id/forget_text"
@@ -74,6 +86,8 @@
         android:layout_centerHorizontal="true"
         android:text="@string/forget_pass"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_light"/>
 
 </RelativeLayout>

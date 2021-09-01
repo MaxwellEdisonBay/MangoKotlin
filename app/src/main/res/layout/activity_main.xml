@@ -4,21 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_orange"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/main_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/app_name"
         android:layout_marginTop="50dp"
-        android:textSize="30sp"/>
+        android:textSize="50sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_bold"/>
+
+    <TextView
+        android:layout_below="@id/main_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/main_desc"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_bold"/>
 
     <LinearLayout
         android:id="@+id/text_fields_register"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:divider="@drawable/empty_divider"
         android:orientation="vertical"
         android:showDividers="middle"
@@ -27,9 +43,12 @@
 
         <EditText
             android:id="@+id/username_field_register"
+            android:paddingStart="15dp"
+            android:paddingEnd="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username_hint"
+            android:background="@drawable/rounded_edit_text_field"
             android:minHeight="48dp"
             android:inputType="text"/>
 
@@ -37,15 +56,21 @@
             android:id="@+id/email_field_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="15dp"
+            android:paddingEnd="0dp"
             android:hint="@string/email_hint"
+            android:background="@drawable/rounded_edit_text_field"
             android:minHeight="48dp"
             android:inputType="textEmailAddress"/>
 
         <EditText
             android:id="@+id/password_field_register"
+            android:paddingStart="15dp"
+            android:paddingEnd="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password_hint"
+            android:background="@drawable/rounded_edit_text_field"
             android:minHeight="48dp"
             android:inputType="textPassword"/>
     </LinearLayout>
@@ -59,6 +84,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:text="@string/register_btn_text"
+        android:background="@drawable/rounded_button_login"
          />
 
     <TextView
@@ -69,6 +95,7 @@
         android:layout_centerHorizontal="true"
         android:text="@string/login_text"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        android:textColor="@color/white"/>
 
 </RelativeLayout>

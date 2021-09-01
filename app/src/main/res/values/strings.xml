@@ -11,6 +11,7 @@
     <string name="err_username_empty">Username is a required field</string>
     <string name="err_email_empty">Email is a required field</string>
     <string name="err_password_empty">Password is a required field</string>
+    <string name="add_photo">Add a photo</string>
 
 
 </resources>

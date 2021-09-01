@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
@@ -16,7 +17,7 @@ class LoginActivity: AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         val loginBtn = findViewById<Button>(R.id.send_btn_login)
-        val backBtn = findViewById<FloatingActionButton>(R.id.login_back_btn)
+        val backBtn = findViewById<MaterialButton>(R.id.login_back_btn)
 
         loginBtn.setOnClickListener {
             performLogin()

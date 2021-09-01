@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_orange"
-    tools:context=".MainActivity">
+    tools:context=".RegisterActivity">
 
     <TextView
         android:id="@+id/main_label"
@@ -20,6 +20,7 @@
         android:fontFamily="@font/roboto_bold"/>
 
     <TextView
+        android:id="@+id/main_desc"
         android:layout_below="@id/main_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,6 +31,37 @@
         android:textColor="@color/white"
         android:fontFamily="@font/roboto_bold"/>
 
+    <FrameLayout
+        android:id="@+id/add_photo_layout"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/main_desc"
+        android:layout_marginTop="40dp"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/add_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@color/main_purple"
+            android:clickable="true"
+            android:focusable="true"
+            />
+        <TextView
+            android:id="@+id/add_photo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_photo"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_light"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:clickable="false"
+            />
+    </FrameLayout>
+
+
     <LinearLayout
         android:id="@+id/text_fields_register"
         android:layout_width="300dp"
@@ -38,7 +70,8 @@
         android:divider="@drawable/empty_divider"
         android:orientation="vertical"
         android:showDividers="middle"
-        android:layout_marginTop="200dp"
+        android:layout_below="@id/add_photo_layout"
+        android:layout_marginTop="20dp"
         >
 
         <EditText

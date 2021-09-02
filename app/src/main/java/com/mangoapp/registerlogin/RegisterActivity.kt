@@ -1,10 +1,9 @@
-package com.mangoapp
+package com.mangoapp.registerlogin
 
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -14,14 +13,14 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
-import androidx.core.graphics.drawable.RoundedBitmapDrawable
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.mangoapp.R
+import com.mangoapp.models.User
+import com.mangoapp.messages.LatestMessagesActivity
 import de.hdodenhof.circleimageview.CircleImageView
-import org.w3c.dom.Text
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -53,7 +52,7 @@ class RegisterActivity : AppCompatActivity() {
                         }
                         source?.let { it1 -> ImageDecoder.decodeBitmap(it1) }
                     }
-                    findViewById<TextView>(R.id.add_photo_text).visibility= View.GONE
+                    findViewById<TextView>(R.id.add_photo_text).visibility = View.GONE
                     addPhotoButton.setImageBitmap(bitmap)
                 }
             }
@@ -97,15 +96,52 @@ class RegisterActivity : AppCompatActivity() {
         }
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
-                passwordEditText.setText("")
-                usernameEditText.setText("")
-                emailEditText.setText("")
                 Toast.makeText(this, "Registration success", Toast.LENGTH_SHORT).show()
+                uploadImageToFirebaseStorage()
 
             }
             .addOnFailureListener {
                 Log.println(Log.DEBUG, "ERR - pass", password)
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun uploadImageToFirebaseStorage() {
+        if (selectedPhotoUri == null) return
+        val filename = UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+        ref.putFile(selectedPhotoUri!!)
+            .addOnSuccessListener { it ->
+                Log.d("Register", "Success ${it.metadata?.path}")
+                ref.downloadUrl.addOnSuccessListener {
+                    saveUserToFirebaseDatabase(it.toString())
+                    //TODO create a success toast
+
+                }
+            }
+            .addOnFailureListener {
+                //TODO create a failure toast
+            }
+    }
+
+    private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val username = findViewById<EditText>(R.id.username_field_register).text.toString()
+        ref.setValue(User(uid, username, profileImageUrl))
+            .addOnSuccessListener {
+                Log.d("Register", "Saved user to Firebase DB")
+                findViewById<EditText>(R.id.username_field_register).setText("")
+                findViewById<EditText>(R.id.email_field_register).setText("")
+                findViewById<EditText>(R.id.password_field_register).setText("")
+
+                val intent = Intent(this, LatestMessagesActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                //TODO create a success toast
+            }
+            .addOnFailureListener {
+                //TODO create a failure toast
             }
     }
 

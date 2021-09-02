@@ -12,6 +12,10 @@
     <string name="err_email_empty">Email is a required field</string>
     <string name="err_password_empty">Password is a required field</string>
     <string name="add_photo">Add a photo</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="new_message">New Message</string>
+    <string name="send">Send</string>
+    <string name="type_your_message">Type your message</string>
 
 
 </resources>

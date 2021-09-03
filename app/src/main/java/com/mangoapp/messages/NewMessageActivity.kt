@@ -51,7 +51,6 @@ class NewMessageActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
         recyclerView.adapter = adapter

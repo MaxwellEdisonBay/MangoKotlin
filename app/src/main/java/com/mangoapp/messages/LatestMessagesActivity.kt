@@ -6,14 +6,16 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.mangoapp.R
+import com.mangoapp.models.ChatMessage
 import com.mangoapp.models.User
 import com.mangoapp.registerlogin.RegisterActivity
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.Item
 
 class LatestMessagesActivity : AppCompatActivity() {
 
@@ -24,8 +26,54 @@ class LatestMessagesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview_latest_messages)
+        recyclerView.adapter = adapter
+//        setupDummyRows()
+        listenForLatestMessages()
+
         fetchCurrentUser()
         verifyUserIsLoggedIn()
+    }
+
+    private fun listenForLatestMessages() {
+        val fromId = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/latest_messages/$fromId")
+        ref.addChildEventListener(object: ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val chatMessage = snapshot.getValue(ChatMessage::class.java)
+                adapter.add(LatestMessageRow())
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+            }
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
+    }
+
+    class LatestMessageRow: Item<GroupieViewHolder>(){
+        override fun getLayout(): Int {
+            return R.layout.latest_message_row
+        }
+
+        override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+        }
+
+    }
+    val adapter = GroupAdapter<GroupieViewHolder>()
+    private fun setupDummyRows() {
+
+        adapter.add(LatestMessageRow())
+        adapter.add(LatestMessageRow())
+        adapter.add(LatestMessageRow())
+        adapter.add(LatestMessageRow())
+
     }
 
     private fun fetchCurrentUser() {

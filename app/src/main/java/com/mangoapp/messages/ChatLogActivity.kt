@@ -42,7 +42,6 @@ class ChatLogActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
         listenForMessages()
-
         sendButton.setOnClickListener {
             Log.d(TAG, "Attempt to send message...")
             performSendMessage()
@@ -62,15 +61,16 @@ class ChatLogActivity : AppCompatActivity() {
                     Log.d(TAG, chatMessage.text)
                     if (chatMessage.fromId == FirebaseAuth.getInstance().uid){
                         val currentUser = LatestMessagesActivity.currentUser ?:return
+                        adapter.add(ChatToItem(chatMessage.text, currentUser))
 
-                        adapter.add(ChatFromItem(chatMessage.text, currentUser))
+
+
                     }
                     else {
-                        adapter.add(ChatToItem(chatMessage.text, toUser!!))
+                        adapter.add(ChatFromItem(chatMessage.text, toUser!!))
                     }
                     val recyclerView = findViewById<RecyclerView>(R.id.recycle_view_chat_log)
                     recyclerView.smoothScrollToPosition(adapter.itemCount-1)
-
                 }
             }
 
@@ -119,12 +119,18 @@ class ChatLogActivity : AppCompatActivity() {
                 recyclerView.smoothScrollToPosition(adapter.itemCount-1)
             }
         reversedRef.setValue(chatMessage)
+
+        val latestMessageRef = FirebaseDatabase.getInstance().getReference("/latest_messages/$fromId/$toId")
+        latestMessageRef.setValue(chatMessage)
+
+        val reversedLatestMessageRef = FirebaseDatabase.getInstance().getReference("/latest_messages/$toId/$fromId")
+        reversedLatestMessageRef.setValue(chatMessage)
+
     }
 
     private fun prepareMessage(editText: EditText): Boolean {
         val text = editText.text
         val trimmedText = text.trim().toString()
-//        Log.d("REGEX RESULT",trimmedText)
 
         return if (trimmedText=="") {
             editText.setText("")

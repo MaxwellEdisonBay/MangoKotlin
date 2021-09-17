@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/drawable/chatlog_message.xml" value="0.2109375" />
         <entry key="app/src/main/res/layout/activity_chat_log.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/activity_latest_messages.xml" value="0.19479166666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/chat_log_from_row.xml" value="0.19479166666666667" />
         <entry key="app/src/main/res/layout/chat_log_to_row.xml" value="0.19479166666666667" />
         <entry key="app/src/main/res/layout/latest_message_row.xml" value="0.1984375" />

@@ -34,9 +34,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:windowSoftInputMode="stateHidden"
             android:name=".registerlogin.RegisterActivity"
             android:exported="true" />
-        <activity android:name=".registerlogin.LoginActivity" />
+        <activity
+            android:name=".registerlogin.LoginActivity"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

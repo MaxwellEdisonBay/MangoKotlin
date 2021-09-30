@@ -13,23 +13,26 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import com.androidnetworking.AndroidNetworking
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.mangoapp.R
 import com.mangoapp.models.User
 import com.mangoapp.messages.LatestMessagesActivity
+import com.mangoapp.network.NetworkConnector
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
     var selectedPhotoUri: Uri? = null
+    val networkConnector = NetworkConnector()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        networkConnector.initialize(this)
         val registerBtn = findViewById<Button>(R.id.send_btn_register)
         val loginText = findViewById<TextView>(R.id.login_text)
         val addPhotoButton = findViewById<CircleImageView>(R.id.add_photo)
@@ -124,13 +127,35 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
+//    private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
+//        val uid = FirebaseAuth.getInstance().uid ?: ""
+//        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+//        val username = findViewById<EditText>(R.id.username_field_register).text.toString()
+//        ref.setValue(User(uid, username, profileImageUrl))
+//            .addOnSuccessListener {
+//                Log.d("Register", "Saved user to Firebase DB")
+//                findViewById<EditText>(R.id.username_field_register).setText("")
+//                findViewById<EditText>(R.id.email_field_register).setText("")
+//                findViewById<EditText>(R.id.password_field_register).setText("")
+//
+//                val intent = Intent(this, LatestMessagesActivity::class.java)
+//                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                startActivity(intent)
+//                //TODO create a success toast
+//            }
+//            .addOnFailureListener {
+//                //TODO create a failure toast
+//            }
+//    }
     private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+//        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
         val username = findViewById<EditText>(R.id.username_field_register).text.toString()
-        ref.setValue(User(uid, username, profileImageUrl))
-            .addOnSuccessListener {
-                Log.d("Register", "Saved user to Firebase DB")
+//        ref.setValue(User(uid, username, profileImageUrl))
+//            .addOnSuccessListener {
+//                Log.d("Register", "Saved user to Firebase DB")
+        val user = User(uid,username,profileImageUrl)
+        networkConnector.send_post(user, "http://api.mango-friends.com/")
                 findViewById<EditText>(R.id.username_field_register).setText("")
                 findViewById<EditText>(R.id.email_field_register).setText("")
                 findViewById<EditText>(R.id.password_field_register).setText("")
@@ -138,11 +163,10 @@ class RegisterActivity : AppCompatActivity() {
                 val intent = Intent(this, LatestMessagesActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
-                //TODO create a success toast
-            }
-            .addOnFailureListener {
-                //TODO create a failure toast
-            }
+//            }
+//            .addOnFailureListener {
+//                //TODO create a failure toast
+//            }
     }
 
 }

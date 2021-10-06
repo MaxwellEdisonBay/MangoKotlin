@@ -90,8 +90,6 @@ class ChatLogActivity : AppCompatActivity() {
 
     private fun performSendMessage() {
 //        val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
-
-
         val editText = findViewById<EditText>(R.id.edit_text_chat_log)
         if (!prepareMessage(editText)) return
         val text = editText.text.toString()
@@ -116,7 +114,8 @@ class ChatLogActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Log.d(TAG, "Successfully saved a message ${ref.key}")
                 editText.setText("")
-                recyclerView.smoothScrollToPosition(adapter.itemCount-1)
+                if  (adapter.itemCount!=0)
+                    recyclerView.smoothScrollToPosition(adapter.itemCount-1)
             }
         reversedRef.setValue(chatMessage)
 

@@ -1,6 +1,5 @@
 package com.mangoapp.registerlogin
 
-import io.ktor.client.*
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -17,18 +16,21 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.gson.Gson
 import com.mangoapp.R
 import com.mangoapp.models.User
 import com.mangoapp.messages.LatestMessagesActivity
 import com.mangoapp.network.NetworkConnector
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
+import android.content.SharedPreferences
+
+
 
 
 class RegisterActivity : AppCompatActivity() {
 
     var selectedPhotoUri: Uri? = null
+    var prefs: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +39,7 @@ class RegisterActivity : AppCompatActivity() {
         val registerBtn = findViewById<Button>(R.id.send_btn_register)
         val loginText = findViewById<TextView>(R.id.login_text)
         val addPhotoButton = findViewById<CircleImageView>(R.id.add_photo)
-
+        prefs = getSharedPreferences("com.mycompany.myAppName", MODE_PRIVATE);
         val resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK && result.data != null) {
@@ -62,19 +64,14 @@ class RegisterActivity : AppCompatActivity() {
             }
 
         addPhotoButton.setOnClickListener {
-
-
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-
             resultLauncher.launch(intent)
-
         }
 
 
         registerBtn.setOnClickListener {
-
-            performRegister();
+            performRegister()
         }
 
         loginText.setOnClickListener {
@@ -84,6 +81,19 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (prefs!!.getBoolean("firstrun", true)) {
+            // Do first run stuff here then set 'firstrun' as false
+            // using the following line to edit/commit prefs
+            prefs!!.edit().putBoolean("firstrun", false).commit()
+            Log.d("RUN TYPE","FIRST RUN")
+
+        }
+        else{
+            Log.d("RUN TYPE","NOT FIRST RUN")
+        }
+    }
 
     private fun performRegister() {
         val emailEditText = findViewById<EditText>(R.id.email_field_register)
@@ -153,10 +163,6 @@ class RegisterActivity : AppCompatActivity() {
         val username = findViewById<EditText>(R.id.username_field_register).text.toString()
         val networkConnector = NetworkConnector()
         networkConnector.apiSendRegisterData(this,User(uid,username,profileImageUrl))
-
-
-
-
     }
 
 }

@@ -6,7 +6,6 @@ plugins {
 
 android {
     compileSdk 30
-
     defaultConfig {
         applicationId "com.mangoapp"
         minSdk 21

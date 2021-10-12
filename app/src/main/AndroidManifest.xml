@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MangoKotlin">
         <activity
+            android:name=".first_launch.InitialStep3"
+            android:exported="false" />
+        <activity
+            android:name=".first_launch.InitialStep2"
+            android:exported="false" />
+        <activity
+            android:name=".first_launch.InitialStep1"
+            android:exported="false" />
+        <activity
             android:name=".messages.ChatLogActivity"
             android:exported="true"
             android:windowSoftInputMode="stateHidden">
@@ -34,12 +43,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:windowSoftInputMode="stateHidden"
             android:name=".registerlogin.RegisterActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".registerlogin.LoginActivity"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

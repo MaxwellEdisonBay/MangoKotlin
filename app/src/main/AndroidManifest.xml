@@ -2,13 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mangoapp">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MangoKotlin">
+        <activity
+            android:name=".content_loaders.ImagePickerPopUp"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".first_launch.InitialStep3"
             android:exported="false" />
@@ -17,7 +25,16 @@
             android:exported="false" />
         <activity
             android:name=".first_launch.InitialStep1"
-            android:exported="false" />
+            android:exported="true">
+
+            <!-- TEMP -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- TEMP -->
+        </activity>
         <activity
             android:name=".messages.ChatLogActivity"
             android:exported="true"
@@ -36,11 +53,13 @@
         <activity
             android:name=".messages.LatestMessagesActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".registerlogin.RegisterActivity"

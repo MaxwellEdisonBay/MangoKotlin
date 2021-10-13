@@ -1,0 +1,44 @@
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sliding_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    sothree:umanoFadeColor="@color/black"
+    sothree:umanoPanelHeight="150dp"
+    sothree:umanoShadowHeight="4dp"
+    sothree:umanoAnchorPoint="0.5">
+
+    <RelativeLayout
+        android:id="@+id/image_picker_popup_exit_field"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|top"
+            android:text="The Awesome Sliding Up Panel"
+            android:textSize="16sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/image_picker_popup_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                sothree:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                sothree:spanCount="4">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </ScrollView>
+    </RelativeLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

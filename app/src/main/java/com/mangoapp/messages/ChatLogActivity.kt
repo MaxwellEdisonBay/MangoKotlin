@@ -14,6 +14,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.mangoapp.R
+import com.mangoapp.expands.ChatFromItemAdapter
+import com.mangoapp.expands.ChatToItemAdapter
 import com.mangoapp.expands.ExpandedTextWatcher
 import com.mangoapp.models.ChatMessage
 import com.mangoapp.models.User
@@ -61,13 +63,13 @@ class ChatLogActivity : AppCompatActivity() {
                     Log.d(TAG, chatMessage.text)
                     if (chatMessage.fromId == FirebaseAuth.getInstance().uid){
                         val currentUser = LatestMessagesActivity.currentUser ?:return
-                        adapter.add(ChatToItem(chatMessage.text, currentUser))
+                        adapter.add(ChatToItemAdapter(chatMessage.text, currentUser))
 
 
 
                     }
                     else {
-                        adapter.add(ChatFromItem(chatMessage.text, toUser!!))
+                        adapter.add(ChatFromItemAdapter(chatMessage.text, toUser!!))
                     }
                     val recyclerView = findViewById<RecyclerView>(R.id.recycle_view_chat_log)
                     recyclerView.smoothScrollToPosition(adapter.itemCount-1)
@@ -140,37 +142,4 @@ class ChatLogActivity : AppCompatActivity() {
         }
     }
 
-    class ChatFromItem(private val text: String, private val user:User) : Item<GroupieViewHolder>() {
-        override fun getLayout(): Int {
-            return R.layout.chat_log_from_row
-        }
-
-        override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-            val messageText =
-                viewHolder.itemView.findViewById<TextView>(R.id.chat_log_from_message_text)
-            val uri = user.profileImageUrl
-            val profileImage =
-                viewHolder.itemView.findViewById<CircleImageView>(R.id.chat_log_from_user_image)
-            Picasso.get().load(uri).into(profileImage)
-            messageText.text = text
-        }
-    }
-
-    class ChatToItem(private val text: String, private val user: User) : Item<GroupieViewHolder>() {
-        override fun getLayout(): Int {
-            return R.layout.chat_log_to_row
-        }
-
-        override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-            val messageText =
-                viewHolder.itemView.findViewById<TextView>(R.id.chat_log_to_message_text)
-
-            messageText.text = text
-            // load profile image to CircleImageView
-            val uri = user.profileImageUrl
-            val profileImage =
-                viewHolder.itemView.findViewById<CircleImageView>(R.id.chat_log_to_user_image)
-            Picasso.get().load(uri).into(profileImage)
-        }
-    }
 }

@@ -60,4 +60,8 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
     implementation 'com.google.code.gson:gson:2.8.6'
+//    implementation 'com.yanzhenjie:album:2.1.3'
+//    implementation 'com.zendesk.belvedere2:belvedere:3.0.0-RC'
+    implementation 'com.sothree.slidinguppanel:library:3.4.0'
+
 }

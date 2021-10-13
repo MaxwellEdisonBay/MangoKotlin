@@ -20,7 +20,7 @@ import com.xwray.groupie.GroupieViewHolder
 
 class LatestMessagesActivity : AppCompatActivity() {
 
-    val adapter = GroupAdapter<GroupieViewHolder>()
+    private val adapter = GroupAdapter<GroupieViewHolder>()
     val latestMessagesMap  = HashMap<String, ChatMessage>()
 
     companion object {

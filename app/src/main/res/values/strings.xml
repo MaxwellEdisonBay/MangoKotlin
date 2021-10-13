@@ -17,5 +17,10 @@
     <string name="send">Send</string>
     <string name="type_your_message">Type your message</string>
 
+    <string name="init_menu_gender_popup_text_1">Male</string>
+    <string name="init_menu_gender_popup_text_2">Female</string>
+    <string name="init_menu_gender_popup_text_3">Others</string>
+    <string name="init_menu_gender_popup_text_4">Do not answer</string>
+    <string name="init_button_select_gender_text">Choose gender</string>
 
 </resources>

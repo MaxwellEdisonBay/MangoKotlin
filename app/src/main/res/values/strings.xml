@@ -23,4 +23,6 @@
     <string name="init_menu_gender_popup_text_4">Do not answer</string>
     <string name="init_button_select_gender_text">Choose gender</string>
 
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+
 </resources>

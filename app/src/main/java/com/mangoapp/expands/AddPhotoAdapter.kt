@@ -11,6 +11,7 @@ import com.mangoapp.first_launch.ClickListener
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
+import java.io.File
 import java.lang.ref.WeakReference
 
 
@@ -40,7 +41,7 @@ class AddPhotoAdapter(val uri: Uri?, val clickListener: ClickListener) :
         }
         else {
             removeButton!!.visibility = View.VISIBLE
-            Picasso.get().load(uri).into(imageView)
+            Picasso.get().load(File(uri.toString())).fit().centerCrop().into(imageView)
         }
     }
 

@@ -1,44 +1,65 @@
-<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:sothree="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/sliding_layout"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="bottom"
-    sothree:umanoFadeColor="@color/black"
-    sothree:umanoPanelHeight="150dp"
-    sothree:umanoShadowHeight="4dp"
-    sothree:umanoAnchorPoint="0.5">
+    >
 
-    <RelativeLayout
-        android:id="@+id/image_picker_popup_exit_field"
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/image_picker_popup_sliding_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        sothree:umanoAnchorPoint="0.5"
+        sothree:umanoFadeColor="@color/black"
+        sothree:umanoPanelHeight="@dimen/sliding_panel_height"
+        sothree:umanoScrollableView="@id/image_picker_popup_recycler_view"
+        sothree:umanoShadowHeight="4dp"
+        >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
+        <RelativeLayout
+            android:id="@+id/image_picker_popup_exit_field"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-        <TextView
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center|top"
-            android:text="The Awesome Sliding Up Panel"
-            android:textSize="16sp" />
+            android:background="@color/white">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp">
+
+            <ImageView
+                android:src="@drawable/add_content_slider_rectangle"
+                android:layout_width="120dp"
+                android:layout_height="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center|top"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/image_picker_popup_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:scrollbars="vertical"
                 sothree:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 sothree:spanCount="4">
 
+
             </androidx.recyclerview.widget.RecyclerView>
-        </ScrollView>
-    </RelativeLayout>
-</com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+        </FrameLayout>
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/activity_image_picker_add_content_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:background="@drawable/add_content_circle_button"
+        android:padding="15dp"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"
+        android:src="@drawable/add_content_clip"
+        app:tint="@color/white" />
+</FrameLayout>

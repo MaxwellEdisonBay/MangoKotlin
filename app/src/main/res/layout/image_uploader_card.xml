@@ -11,20 +11,23 @@
         android:id="@+id/image_uploader_card_remove_button"
         android:layout_gravity="end"
         android:layout_width="25dp"
-        android:layout_height="35dp"
+        android:layout_height="30dp"
         />
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/image_uploader_card_relativelayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_margin="10dp"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardBackgroundColor="@color/transparent"
+        card_view:cardElevation="0dp"
         >
 
 
         <ImageView
             android:id="@+id/image_uploader_card_imageview"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@color/black" />
-    </RelativeLayout>
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            />
+    </androidx.cardview.widget.CardView>
 </androidx.cardview.widget.CardView>

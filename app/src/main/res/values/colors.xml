@@ -11,4 +11,7 @@
     <color name="main_orange">#FF9B00</color>
     <color name="main_teal">#00FF9B</color>
     <color name="main_purple">#9B00FF</color>
+    <color name="photo_selected_green">#77fc03</color>
+    <color name="light_grey">#919191</color>
+    <color name="transparent">#00000000</color>
 </resources>
